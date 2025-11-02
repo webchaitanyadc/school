@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Our Doctors — Vira Medicity Super Specialist Hospital</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #0b2545;
+            --green: #19856a;
+            --green-dark: #0d5a47;
+            --muted: #6b7280;
+            --bg: #f7fafc;
+            --card: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            color: #213042;
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top bar */
+        .topbar {
+            background: #08182a;
+            color: #fff;
+            font-size: 0.9rem;
+            padding: 7px 0;
+        }
+
+        .topbar a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        .topbar .icon {
+            opacity: 0.85;
+            margin-right: 6px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid rgba(13, 30, 58, 0.04);
+            transition: box-shadow .25s, padding .25s;
+            padding: 0;
+            min-height: 50px;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 6px 20px rgba(10, 20, 40, 0.08);
+        }
+
+        .navbar .navbar-brand {
+            font-weight: 700;
+            color: var(--green);
+            font-size: 1.3rem;
+        }
+
+        .navbar .nav-link {
+            color: #22334a;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 4px 10px;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: var(--green);
+        }
+
+        .navbar .btn {
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            border-radius: 25px;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+            color: white;
+            padding: 100px 0 60px;
+            margin-top: 50px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .page-header .breadcrumb {
+            background: transparent;
+            padding: 0;
+            margin: 0;
+        }
+
+        .page-header .breadcrumb-item {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .page-header .breadcrumb-item.active {
+            color: white;
+        }
+
+        .page-header .breadcrumb-item + .breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .page-header .breadcrumb-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Intro Section */
+        .intro-section {
+            background: white;
+            padding: 80px 0 60px;
+        }
+
+        .intro-section h2 {
+            color: var(--navy);
+            font-weight: 800;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .intro-section p {
+            color: var(--muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Doctors Section */
+        .doctors-section {
+            background: var(--bg);
+            padding: 80px 0;
+        }
+
+        .section-title {
+            color: var(--navy);
+            font-weight: 800;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--green);
+            border-radius: 2px;
+        }
+
+        /* Doctor Card */
+        .doctor-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(11, 28, 46, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(11, 28, 46, 0.15);
+        }
+
+        .doctor-image-wrapper {
+            position: relative;
+            height: 350px;
+            background: linear-gradient(135deg, rgba(25, 133, 106, 0.1), rgba(13, 90, 71, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .doctor-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(11, 37, 69, 0.1) 100%);
+        }
+
+        .doctor-image-wrapper i {
+            font-size: 120px;
+            color: var(--green);
+            opacity: 0.8;
+        }
+
+        .doctor-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--green);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(25, 133, 106, 0.3);
+        }
+
+        .doctor-info {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .doctor-name {
+            color: var(--navy);
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .doctor-qualification {
+            color: var(--green);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .doctor-qualification i {
+            font-size: 1.1rem;
+        }
+
+        .doctor-description {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .doctor-specialties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .specialty-badge {
+            background: var(--bg);
+            color: var(--green);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(25, 133, 106, 0.2);
+        }
+
+        .doctor-contact {
+            padding: 20px 30px;
+            background: var(--bg);
+            border-top: 1px solid rgba(11, 28, 46, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-btn {
+            background: var(--green);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .contact-btn:hover {
+            background: var(--green-dark);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--navy);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-item i {
+            font-size: 3rem;
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0d1b2a;
+            color: #fff;
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column h4 {
+            color: var(--green);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            width: 40px;
+            height: 3px;
+            background: var(--green);
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            border-radius: 5px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--green);
+        }
+
+        .footer-column p {
+            color: #bbb;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-links li a {
+            background: #1b263b;
+            color: #fff;
+            font-size: 1.1rem;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .social-links li a:hover {
+            background: var(--green);
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            color: #bbb;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .contact-info i {
+            color: var(--green);
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #1b263b;
+            margin-top: 40px;
+            padding-top: 15px;
+        }
+
+        .footer-bottom p {
+            color: #bbb;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        @media (max-width: 991px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .doctor-name {
+                font-size: 1.2rem;
+            }
+
+            .doctor-image-wrapper {
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .page-header h1 {
+                font-size: 1.7rem;
+            }
+
+            .doctor-card {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+        <div class="container d-flex justify-content-between small">
+            <div>
+                <span class="me-3"><i class="bi bi-geo-alt icon"></i> Jalna, Maharashtra</span>
+                <span><i class="bi bi-envelope icon"></i> Viramedicity@gmail.com</span>
+            </div>
+            <div>
+                <span class="me-3"><i class="bi bi-telephone icon"></i> 9272186477 / 9272180023</span>
+                <a href="#" class="ms-2"><i class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/vira_medicity_hospital/" class="ms-2"><i
+                        class="bi bi-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container py-3">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-heart-pulse-fill"></i> Vira Medicity
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link px-3" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 active" href="doctors.html">Doctors</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-3"><a class="btn btn-sm" href="#contact"
+                            style="background:var(--green); color:#fff; border-radius:50px; padding:8px 20px; font-weight:700">Book
+                            Appointment</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <div class="container text-center">
+            <h1 data-aos="fade-up">Our Expert Doctors</h1>
+            <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="100">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Doctors</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- INTRO SECTION -->
+    <section class="intro-section">
+        <div class="container" data-aos="fade-up">
+            <h2>Meet Our Medical Team</h2>
+            <p>Our panel of highly qualified and experienced doctors is dedicated to providing exceptional healthcare
+                services. Each specialist brings years of expertise and is committed to ensuring the best outcomes for
+                our patients through evidence-based medicine and compassionate care.</p>
+        </div>
+    </section>
+
+    <!-- DOCTORS SECTION -->
+    <section class="doctors-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Our Specialists</h2>
+
+            <div class="row g-4">
+                <!-- Doctor 1 -->
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="0">
+                    <div class="doctor-card">
+                        <div class="doctor-image-wrapper">
+                            <i class="bi bi-person-circle"></i>
+                            <div class="doctor-badge">Chief Doctor</div>
+                        </div>
+                        <div class="doctor-info">
+                            <h3 class="doctor-name">Dr. Suhas Sheela Kisan Wighne</h3>
+                            <div class="doctor-qualification">
+                                <i class="bi bi-award-fill"></i>
+                                <span>MBBS, MD Medicine</span>
+                            </div>
+                            <p class="doctor-description">A chief doctor oversees clinical operations, ensures patient
+                                care quality, and manages medical staff and policies in a healthcare facility. With
+                                extensive experience in internal medicine, Dr. Wighne leads our medical team with
+                                dedication and expertise.</p>
+                            <div class="doctor-specialties">
+                                <span class="specialty-badge">Internal Medicine</span>
+                                <span class="specialty-badge">Clinical Operations</span>
+                                <span class="specialty-badge">Patient Care</span>
+                            </div>
+                        </div>
+                        <div class="doctor-contact">
+                            <span style="color: var(--muted); font-size: 0.9rem;">Available 24/7</span>
+                            <a href="#contact" class="contact-btn">Book Appointment <i
+                                    class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor 2 -->
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="doctor-card">
+                        <div class="doctor-image-wrapper">
+                            <i class="bi bi-person-circle"></i>
+                            <div class="doctor-badge">Chief Doctor</div>
+                        </div>
+                        <div class="doctor-info">
+                            <h3 class="doctor-name">Dr. Rajendra Sakharam Rakh</h3>
+                            <div class="doctor-qualification">
+                                <i class="bi bi-award-fill"></i>
+                                <span>MBBS, MD DMRE</span>
+                            </div>
+                            <p class="doctor-description">A chief doctor oversees clinical operations, ensures patient
+                                care quality, and manages medical staff and policies in a healthcare facility.
+                                Specialized in radiology and medical imaging, Dr. Rakh brings precision and expertise
+                                to diagnostic services.</p>
+                            <div class="doctor-specialties">
+                                <span class="specialty-badge">Radiology</span>
+                                <span class="specialty-badge">Medical Imaging</span>
+                                <span class="specialty-badge">Diagnostics</span>
+                            </div>
+                        </div>
+                        <div class="doctor-contact">
+                            <span style="color: var(--muted); font-size: 0.9rem;">Available 24/7</span>
+                            <a href="#contact" class="contact-btn">Book Appointment <i
+                                    class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor 3 -->
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="doctor-card">
+                        <div class="doctor-image-wrapper">
+                            <i class="bi bi-person-circle"></i>
+                            <div class="doctor-badge">Specialist</div>
+                        </div>
+                        <div class="doctor-info">
+                            <h3 class="doctor-name">Dr. Milind Katole</h3>
+                            <div class="doctor-qualification">
+                                <i class="bi bi-award-fill"></i>
+                                <span>MBBS, DCP</span>
+                            </div>
+                            <p class="doctor-description">A chief doctor oversees clinical operations, ensures patient
+                                care quality, and manages medical staff and policies in a healthcare facility. With
+                                expertise in pathology, Dr. Katole ensures accurate diagnostic services and laboratory
+                                excellence.</p>
+                            <div class="doctor-specialties">
+                                <span class="specialty-badge">Pathology</span>
+                                <span class="specialty-badge">Laboratory Medicine</span>
+                                <span class="specialty-badge">Diagnostics</span>
+                            </div>
+                        </div>
+                        <div class="doctor-contact">
+                            <span style="color: var(--muted); font-size: 0.9rem;">Available 24/7</span>
+                            <a href="#contact" class="contact-btn">Book Appointment <i
+                                    class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Doctor 4 -->
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="doctor-card">
+                        <div class="doctor-image-wrapper">
+                            <i class="bi bi-person-circle"></i>
+                            <div class="doctor-badge">Specialist</div>
+                        </div>
+                        <div class="doctor-info">
+                            <h3 class="doctor-name">Dr. Nitesh Kalyanrao Bhojane</h3>
+                            <div class="doctor-qualification">
+                                <i class="bi bi-award-fill"></i>
+                                <span>MBBS, DCH (Mumbai)</span>
+                            </div>
+                            <p class="doctor-description">A chief doctor oversees clinical operations, ensures patient
+                                care quality, and manages medical staff and policies in a healthcare facility.
+                                Specialized in child healthcare, Dr. Bhojane provides comprehensive pediatric care with
+                                compassion and expertise.</p>
+                            <div class="doctor-specialties">
+                                <span class="specialty-badge">Pediatrics</span>
+                                <span class="specialty-badge">Child Health</span>
+                                <span class="specialty-badge">Neonatology</span>
+                            </div>
+                        </div>
+                        <div class="doctor-contact">
+                            <span style="color: var(--muted); font-size: 0.9rem;">Available 24/7</span>
+                            <a href="#contact" class="contact-btn">Book Appointment <i
+                                    class="bi bi-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="stats-section">
+        <div class="container" data-aos="fade-up">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <i class="bi bi-people-fill"></i>
+                        <h3>15+</h3>
+                        <p>Expert Doctors</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <i class="bi bi-hospital"></i>
+                        <h3>10+</h3>
+                        <p>Specialties</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <i class="bi bi-clock-fill"></i>
+                        <h3>24/7</h3>
+                        <p>Availability</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-item">
+                        <i class="bi bi-award-fill"></i>
+                        <h3>100%</h3>
+                        <p>Dedicated Care</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-column">
+                <h4><i class="bi bi-heart-pulse-fill"></i> Vira Medicity</h4>
+                <p>
+                    Leading healthcare facility providing comprehensive medical services with modern infrastructure and
+                    experienced doctors in Jalna, Maharashtra.
+                </p>
+                <ul class="social-links list-inline">
+                    <li class="list-inline-item"><a href="#"><i class="bi bi-facebook"></i></a></li>
+                    <li class="list-inline-item"><a href="https://www.instagram.com/vira_medicity_hospital/"><i
+                                class="bi bi-instagram"></i></a></li>
+                    <li class="list-inline-item"><a href="#"><i class="bi bi-youtube"></i></a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Our Services</a></li>
+                    <li><a href="doctors.html">Doctors</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Departments</h4>
+                <ul>
+                    <li><a href="#">Cardiology</a></li>
+                    <li><a href="#">Orthopedic</a></li>
+                    <li><a href="#">Neurology</a></li>
+                    <li><a href="#">Oncology</a></li>
+                    <li><a href="#">Pathology</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contact Info</h4>
+                <ul class="contact-info">
+                    <li><i class="bi bi-geo-alt-fill"></i> Beside Krushn Kunja Residency, Mantha Bypass, Jalna,
+                        Maharashtra 431203</li>
+                    <li><i class="bi bi-telephone-fill"></i> 9272186477 / 9272180023</li>
+                    <li><i class="bi bi-envelope-fill"></i> Viramedicity@gmail.com</li>
+                    <li><i class="bi bi-clock-fill"></i> Emergency: 24/7 Available</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2023 Vira Medicity Hospital. All Rights Reserved. | Design & Development by MSquare Software</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Initialize AOS animations
+        AOS.init({ duration: 900, once: true });
+
+        // Navbar scroll effect
+        const nav = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
+                        window.scrollTo({ top: y, behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
