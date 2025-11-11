@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Departments — Vira Medicity Super Specialist Hospital</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #0b2545;
+            --green: #19856a;
+            --green-dark: #0d5a47;
+            --muted: #6b7280;
+            --bg: #f7fafc;
+            --card: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            color: #213042;
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top bar */
+        .topbar {
+            background: #08182a;
+            color: #fff;
+            font-size: 0.9rem;
+            padding: 7px 0;
+        }
+
+        .topbar a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+        }
+
+        .topbar .icon {
+            opacity: 0.85;
+            margin-right: 6px;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: var(--card);
+            border-bottom: 1px solid rgba(13, 30, 58, 0.04);
+            transition: box-shadow .25s, padding .25s;
+            padding: 0;
+            min-height: 50px;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 6px 20px rgba(10, 20, 40, 0.08);
+        }
+
+        .navbar .navbar-brand {
+            font-weight: 700;
+            color: var(--green);
+            font-size: 1.3rem;
+        }
+
+        .navbar .navbar-brand img {
+            width: 230px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .navbar .nav-link {
+            color: #22334a;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 4px 10px;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: var(--green);
+        }
+
+        .navbar .btn {
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            border-radius: 25px;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+            color: white;
+            padding: 100px 0 60px;
+            margin-top: 50px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .page-header .breadcrumb {
+            background: transparent;
+            padding: 0;
+            margin: 0;
+        }
+
+        .page-header .breadcrumb-item {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .page-header .breadcrumb-item.active {
+            color: white;
+        }
+
+        .page-header .breadcrumb-item+.breadcrumb-item::before {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .page-header .breadcrumb-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Department Grid */
+        .departments-grid {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            color: var(--navy);
+            font-weight: 800;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--green);
+            border-radius: 2px;
+        }
+
+        .dept-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(11, 28, 46, 0.08);
+            transition: all 0.3s;
+            height: 100%;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .dept-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(11, 28, 46, 0.15);
+            border-color: var(--green);
+        }
+
+        .dept-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(25, 133, 106, 0.1), rgba(13, 90, 71, 0.15));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .dept-icon i {
+            font-size: 30px;
+            color: var(--green);
+        }
+
+        .dept-card h5 {
+            color: var(--navy);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .dept-card .dept-number {
+            color: var(--green);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        /* Featured Departments */
+        .featured-dept {
+            padding: 80px 0;
+            background: var(--bg);
+        }
+
+        .featured-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(11, 28, 46, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .featured-card-header {
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+            color: white;
+            padding: 30px;
+        }
+
+        .featured-card-header h3 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .featured-card-header h3 i {
+            font-size: 2rem;
+        }
+
+        .featured-card-body {
+            padding: 35px;
+        }
+
+        .featured-card-body h4 {
+            color: var(--navy);
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .featured-card-body p {
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            padding-left: 35px;
+            position: relative;
+            color: var(--muted);
+        }
+
+        .features-list li::before {
+            content: '\f26b';
+            font-family: 'bootstrap-icons';
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-size: 1.2rem;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--navy);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .stat-item i {
+            font-size: 3rem;
+            color: var(--green);
+            margin-bottom: 15px;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0d1b2a;
+            color: #fff;
+            padding: 60px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-column h4 {
+            color: var(--green);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            width: 40px;
+            height: 3px;
+            background: var(--green);
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            border-radius: 5px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--green);
+        }
+
+        .footer-column p {
+            color: #bbb;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .social-links li a {
+            background: #1b263b;
+            color: #fff;
+            font-size: 1.1rem;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: 0.3s;
+        }
+
+        .social-links li a:hover {
+            background: var(--green);
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+            color: #bbb;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .contact-info i {
+            color: var(--green);
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #1b263b;
+            margin-top: 40px;
+            padding-top: 15px;
+        }
+
+        .footer-bottom p {
+            color: #bbb;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        @media (max-width: 991px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .page-header h1 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+        <div class="container d-flex justify-content-between small">
+            <div>
+                <span class="me-3"><i class="bi bi-geo-alt icon"></i> Jalna, Maharashtra</span>
+                <span><i class="bi bi-envelope icon"></i> Viramedicity@gmail.com</span>
+            </div>
+            <div>
+                <span class="me-3"><i class="bi bi-telephone icon"></i> 9272186477 / 9272180023</span>
+                <a href="#" class="ms-2"><i class="bi bi-facebook"></i></a>
+                <a href="https://www.instagram.com/vira_medicity_hospital/" class="ms-2"><i
+                        class="bi bi-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container py-3">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-heart-pulse-fill"></i> Vira Medicity
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link px-3" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link px-3 active" href="departments.html">Departments</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="doctors.html">Doctors</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-3"><a class="btn btn-sm" href="#contact"
+                            style="background:var(--green); color:#fff; border-radius:50px; padding:8px 20px; font-weight:700">Book
+                            Appointment</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <section class="page-header">
+        <div class="container text-center">
+            <h1 data-aos="fade-up">Our Departments</h1>
+            <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="100">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Departments</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- DEPARTMENTS GRID -->
+    <section class="departments-grid">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Medical Departments</h2>
+
+            <div class="row g-4">
+                <!-- Neurology -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="0">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-lightning-charge"></i>
+                        </div>
+                        <div class="dept-number">01</div>
+                        <h5>Neurology</h5>
+                    </div>
+                </div>
+
+                <!-- Nephrology -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-droplet"></i>
+                        </div>
+                        <div class="dept-number">02</div>
+                        <h5>Nephrology</h5>
+                    </div>
+                </div>
+
+                <!-- Urology -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-heart-pulse"></i>
+                        </div>
+                        <div class="dept-number">03</div>
+                        <h5>Urology</h5>
+                    </div>
+                </div>
+
+                <!-- General Medicine -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-capsule"></i>
+                        </div>
+                        <div class="dept-number">04</div>
+                        <h5>General Medicine</h5>
+                    </div>
+                </div>
+
+                <!-- Pediatrics -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="0">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-emoji-smile"></i>
+                        </div>
+                        <div class="dept-number">05</div>
+                        <h5>Pediatrics</h5>
+                    </div>
+                </div>
+
+                <!-- Ophthalmology -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-eye"></i>
+                        </div>
+                        <div class="dept-number">06</div>
+                        <h5>Ophthalmology</h5>
+                    </div>
+                </div>
+
+                <!-- General Surgery -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-scissors"></i>
+                        </div>
+                        <div class="dept-number">07</div>
+                        <h5>General Surgery</h5>
+                    </div>
+                </div>
+
+                <!-- Obstetrics and Gynecology -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-gender-female"></i>
+                        </div>
+                        <div class="dept-number">08</div>
+                        <h5>Obstetrics & Gynecology</h5>
+                    </div>
+                </div>
+
+                <!-- Orthopedic Surgery -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="0">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-person-standing"></i>
+                        </div>
+                        <div class="dept-number">09</div>
+                        <h5>Orthopedic Surgery</h5>
+                    </div>
+                </div>
+
+                <!-- Radiology -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-activity"></i>
+                        </div>
+                        <div class="dept-number">10</div>
+                        <h5>Radiology</h5>
+                    </div>
+                </div>
+
+                <!-- Trauma Center -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-shield-plus"></i>
+                        </div>
+                        <div class="dept-number">11</div>
+                        <h5>Trauma Center</h5>
+                    </div>
+                </div>
+
+                <!-- Laparoscopic Surgery -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="150">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-camera"></i>
+                        </div>
+                        <div class="dept-number">12</div>
+                        <h5>Laparoscopic Surgery</h5>
+                    </div>
+                </div>
+
+                <!-- Burn Unit -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="0">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-fire"></i>
+                        </div>
+                        <div class="dept-number">13</div>
+                        <h5>Burn Unit & Plastic Surgery</h5>
+                    </div>
+                </div>
+
+                <!-- Pathology -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="50">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-file-medical"></i>
+                        </div>
+                        <div class="dept-number">14</div>
+                        <h5>Pathology</h5>
+                    </div>
+                </div>
+
+                <!-- Dental -->
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="dept-card">
+                        <div class="dept-icon">
+                            <i class="bi bi-emoji-sunglasses"></i>
+                        </div>
+                        <div class="dept-number">15</div>
+                        <h5>Dental</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED DEPARTMENTS -->
+    <section class="featured-dept">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Featured Departments</h2>
+
+            <!-- ENT Department -->
+            <div class="featured-card" data-aos="fade-up">
+                <div class="featured-card-header">
+                    <h3><i class="bi bi-ear"></i> ENT Department</h3>
+                    <p style="margin: 0; font-size: 0.95rem; opacity: 0.9;">Ear, Nose & Throat Specialist Care</p>
+                </div>
+                <div class="featured-card-body">
+                    <h4>Overview</h4>
+                    <p>Ear, nose, and throat (ENT) specialists are also known as otolaryngologists. This department
+                        deals with medical issues related to balance and hearing, sleeping and breathing issues, speech
+                        and swallowing, neck and head cancer, sinuses and allergies, skin disorders, and facial plastic
+                        surgery.</p>
+
+                    <p>The ENT department of Vira Hospital is highly equipped with facilities to provide treatments for
+                        issues related to the ear, nose, and throat. We have a team of highly trained doctors and
+                        experienced staff who take care of the patients.</p>
+
+                    <ul class="features-list">
+                        <li>Endoscopy and advanced surgical procedures</li>
+                        <li>Ophthalmology and plastic surgeries for hearing-related issues</li>
+                        <li>Reconstruction and surgical management of benign tumors</li>
+                        <li>Cancer treatment of the neck and head</li>
+                        <li>Surgery of the neck and face</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ICU Department -->
+            <div class="featured-card" data-aos="fade-up">
+                <div class="featured-card-header">
+                    <h3><i class="bi bi-heart-pulse-fill"></i> Intensive Care Unit (ICU)</h3>
+                    <p style="margin: 0; font-size: 0.95rem; opacity: 0.9;">Critical Care for Severely Ill Patients</p>
+                </div>
+                <div class="featured-card-body">
+                    <h4>Overview</h4>
+                    <p>Our highly trained critical care intensivists treat this department's most severely ill and
+                        injured persons. Vira Hospital has specialists who care for patients undergoing major trauma or
+                        surgery.</p>
+
+                    <p>The doctors of Vira Hospital look after the people who require advanced care and monitoring. The
+                        full spectrum of this department is provided by specialists and other medical experts specially
+                        trained in critical healthcare and are there at the Hospital 24×7 to serve patients.</p>
+
+                    <ul class="features-list">
+                        <li>24×7 critical care specialists</li>
+                        <li>Advanced monitoring systems</li>
+                        <li>Post-operative care for major surgeries</li>
+                        <li>Trauma patient management</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Dentistry Department -->
+            <div class="featured-card" data-aos="fade-up">
+                <div class="featured-card-header">
+                    <h3><i class="bi bi-tooth"></i> Dentistry Department</h3>
+                    <p style="margin: 0; font-size: 0.95rem; opacity: 0.9;">Comprehensive Dental Care</p>
+                </div>
+                <div class="featured-card-body">
+                    <h4>Overview</h4>
+                    <p>The Dentistry Department at Vira Hospital treats both children's and adults' dental issues. The
+                        professionals examine the patient's needs and condition to provide multidisciplinary care.</p>
+
+                    <p>We have a team of licensed dental specialists who provide routine care and special practices to
+                        ensure treatment for every dental problem. In addition, our specialists help the patient manage
+                        issues relating to dental hygiene, dental oncology, dental sleep medicine, etc.</p>
+
+                    <ul class="features-list">
+                        <li>Comprehensive dental examinations</li>
+                        <li>Routine dental care and preventive treatments</li>
+                        <li>Dental oncology services</li>
+                        <li>Dental sleep medicine</li>
+                        <li>Pediatric and adult dental care</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- General Surgery -->
+            <div class="featured-card" data-aos="fade-up">
+                <div class="featured-card-header">
+                    <h3><i class="bi bi-scissors"></i> General Surgery Department</h3>
+                    <p style="margin: 0; font-size: 0.95rem; opacity: 0.9;">Expert Surgical Care</p>
+                </div>
+                <div class="featured-card-body">
+                    <h4>Overview</h4>
+                    <p>Vira Hospital is one of the most experienced hospitals in general surgery practice. We have a
+                        team of highly-trained professionals who have conducted over 2000 laparoscopic surgeries in a
+                        year.</p>
+
+                    <p>Our surgeons are the best surgeons you can find in the country as they know whether you need
+                        surgery or the disease can be cured through medicines or physiotherapy. Plus, we are available
+                        at your service 24×7 for emergencies and other trauma-related services.</p>
+
+                    <ul class="features-list">
+                        <li>Over 2000 laparoscopic surgeries annually</li>
+                        <li>24×7 emergency and trauma services</li>
+                        <li>Diagnostic, preventive, and therapeutic procedures</li>
+                        <li>Minimally invasive surgical techniques</li>
+                        <li>Comprehensive pre and post-operative care</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Ophthalmology -->
+            <div class="featured-card" data-aos="fade-up">
+                <div class="featured-card-header">
+                    <h3><i class="bi bi-eye-fill"></i> Ophthalmology Department</h3>
+                    <p style="margin: 0; font-size: 0.95rem; opacity: 0.9;">Advanced Eye Care Services</p>
+                </div>
+                <div class="featured-card-body">
+                    <h4>Overview</h4>
+                    <p>Vira Hospital contains the most modern equipment and facility to look into conditions relating to
+                        eye problems. It can be any problem relating to glaucoma, cornea, pediatric ophthalmology, Vitro
+                        retina, and oculoplastic.</p>
+
+                    <p>Our highly trained doctors look into different symptoms of eye infection, cataracts, nerve
+                        problems and other eye diseases. We are one of the major eye chains of India that work forefront
+                        in the field of ophthalmic care using advanced medical techniques.</p>
+
+                    <ul class="features-list">
+                        <li>Glaucoma diagnosis and treatment</li>
+                        <li>Corneal disease management</li>
+                        <li>Pediatric ophthalmology services</li>
+                        <li>Vitro retina treatments</li>
+                        <li>Oculoplastic surgery</li>
+                        <li>Cataract surgery with advanced techniques</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
