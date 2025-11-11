@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polly Anderson - Wedding Photography</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #c9a86a;
+            --secondary-color: #8b7355;
+            --dark-bg: #1a1a1a;
+            --light-bg: #fafafa;
+            --text-dark: #2c2c2c;
+            --text-light: #666;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            font-size: 16px;
+            background: #ffffff;
+        }
+        
+        /* Navbar */
+        .navbar {
+            padding: 1.5rem 0;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--text-dark) !important;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-size: 0.95rem;
+            margin: 0 1rem;
+            transition: all 0.3s;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                        url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1200') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+        
+        /* Section Styling */
+        section {
+            padding: 6rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            position: relative;
+            color: var(--text-dark);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            font-style: italic;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 1.5rem auto 0;
+        }
+        
+        /* About Section */
+        .about {
+            background: var(--light-bg);
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.05rem;
+            line-height: 2;
+            color: var(--text-light);
+        }
+        
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(212, 165, 116, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        /* Services */
+        .service-card {
+            text-align: center;
+            padding: 2rem;
+            transition: all 0.4s;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            border: 1px solid #f0f0f0;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+        
+        .service-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            transition: transform 0.4s;
+        }
+        
+        .service-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.2rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .service-card p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            min-height: 70px;
+        }
+        
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+        
+        .service-features {
+            text-align: left;
+            margin: 1.2rem 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .service-features li {
+            padding: 0.4rem 0;
+            font-size: 0.88rem;
+            color: var(--text-light);
+        }
+        
+        .service-features i {
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        .btn-service {
+            display: inline-block;
+            padding: 0.7rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .btn-service:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(201, 168, 106, 0.3);
+            color: white;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            background: #ffffff;
+            color: var(--text-dark);
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 0 8rem;
+        }
+        
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+        
+        .testimonials::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+        
+        .testimonial-slider {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .testimonial-card {
+            padding: 4rem 3rem;
+            text-align: center;
+            background: #ffffff;
+            border-radius: 0;
+            backdrop-filter: none;
+            border: none;
+            box-shadow: none;
+        }
+        
+        .testimonial-card img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 8px 25px rgba(201, 168, 106, 0.2);
+            object-fit: cover;
+        }
+        
+        .quote-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            opacity: 0.3;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 2.5rem;
+            color: var(--text-light);
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .testimonial-author {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .testimonial-role {
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            font-style: italic;
+        }
+        
+        .stars {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            letter-spacing: 3px;
+        }
+        
+        .swiper-pagination {
+            bottom: 0 !important;
+            padding-bottom: 2rem;
+        }
+        
+        .swiper-pagination-bullet {
+            width: 10px;
+            height: 10px;
+            background: var(--text-light);
+            opacity: 0.3;
+            margin: 0 6px !important;
+            transition: all 0.3s;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: var(--primary-color);
+            opacity: 1;
+            width: 30px;
+            border-radius: 5px;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1200') center/cover;
+            color: white;
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+        
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary-color);
+            border: none;
+            padding: 0.8rem 2.5rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: #c29563;
+            transform: translateY(-2px);
+        }
+        
+        /* Articles */
+        .article-card {
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .article-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .article-content {
+            padding: 1.5rem;
+            background: white;
+        }
+        
+        .article-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+        }
+        
+        .article-content p {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .article-meta {
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-outline {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            font-size: 0.8rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-section h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+        
+        .footer-section p,
+        .footer-section a {
+            font-size: 1rem;
+            color: #bbb;
+            line-height: 2;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        
+        .footer-section p i {
+            color: var(--primary-color);
+            margin-right: 0.8rem;
+            width: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212,165,116,0.4);
+            padding-left: 0;
+        }
+        
+        .footer-newsletter input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #444;
+            background: rgba(255,255,255,0.05);
+            color: white;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        .footer-newsletter button {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--primary-color);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .footer-newsletter button:hover {
+            background: #c29563;
+            transform: translateY(-2px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            font-size: 1rem;
+            color: #888;
+        }
+        
+        .swiper {
+            width: 100%;
+            height: 100%;
+            padding-bottom: 3rem;
+        }
+        
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .service-card {
+                margin-bottom: 2rem;
+            }
+            
+            .testimonial-card {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Polly Anderson</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div data-aos="fade-up" data-aos-duration="1000">
+            <h1>Awesome Wedding Photos</h1>
+            <p>CAPTURING YOUR SPECIAL MOMENTS</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Hello!</h2>
+            <div class="about-content" data-aos="fade-up" data-aos-delay="200">
+                <p>Welcome to our photography studio where we specialize in capturing the most precious moments of your life. With over 10 years of experience in wedding and portrait photography, we bring passion, creativity, and professionalism to every shoot. Our goal is to tell your unique story through beautiful, timeless images that you'll cherish forever.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Gallery -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Portfolio</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=500" alt="Wedding">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus fa-2x text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=500" alt="Couple">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus fa-2x text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500" alt="Bride">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus fa-2x text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1594735244796-0b1b72d236fd?w=500" alt="Portrait">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus fa-2x text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=500" alt="Ceremony">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus fa-2x text-white"></i>
+                    </div>
+                </div>
+                <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=500" alt="Details">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus fa-2x text-white"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" style="background: var(--light-bg);">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Our Photography Services</h2>
+            <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Professional photography for every moment of your life</p>
+            <div class="row">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-card">
+                        <i class="fas fa-rings-wedding service-icon"></i>
+                        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400" alt="Wedding">
+                        <h3>Wedding Photography</h3>
+                        <p>Capture your special day with stunning, timeless photos that tell your unique love story.</p>
+                        <div class="service-price">From $2,500</div>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Full day coverage</li>
+                            <li><i class="fas fa-check-circle"></i> 500+ edited photos</li>
+                            <li><i class="fas fa-check-circle"></i> Online gallery</li>
+                        </ul>
+                        <a href="#contact" class="btn-service">Book Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-card">
+                        <i class="fas fa-baby service-icon"></i>
+                        <img src="https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400" alt="Baby Shoot">
+                        <h3>Baby & Newborn</h3>
+                        <p>Preserve precious early moments with gentle, safe, and adorable newborn photography sessions.</p>
+                        <div class="service-price">From $600</div>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Safe posing techniques</li>
+                            <li><i class="fas fa-check-circle"></i> Props included</li>
+                            <li><i class="fas fa-check-circle"></i> 75+ edited photos</li>
+                        </ul>
+                        <a href="#contact" class="btn-service">Book Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <i class="fas fa-calendar-star service-icon"></i>
+                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=400" alt="Event">
+                        <h3>Event Photography</h3>
+                        <p>Professional coverage for corporate events, parties, and celebrations of all kinds.</p>
+                        <div class="service-price">From $1,200</div>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> 4-8 hour coverage</li>
+                            <li><i class="fas fa-check-circle"></i> 300+ edited photos</li>
+                            <li><i class="fas fa-check-circle"></i> Fast delivery</li>
+                        </ul>
+                        <a href="#contact" class="btn-service">Book Now</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <i class="fas fa-briefcase service-icon"></i>
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400" alt="Commercial">
+                        <h3>Commercial Shoots</h3>
+                        <p>High-quality product, brand, and promotional photography for your business needs.</p>
+                        <div class="service-price">From $1,500</div>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check-circle"></i> Studio or location</li>
+                            <li><i class="fas fa-check-circle"></i> Product photography</li>
+                            <li><i class="fas fa-check-circle"></i> Commercial license</li>
+                        </ul>
+                        <a href="#contact" class="btn-service">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Testimonials</h2>
+            <div class="testimonial-slider">
+                <div class="swiper testimonialSwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                                <i class="fas fa-quote-left quote-icon"></i>
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100" alt="Client">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="testimonial-text">"We couldn't be happier with our wedding photos! Polly captured every special moment perfectly. Her attention to detail and creative eye resulted in stunning images that we'll treasure forever."</p>
+                                <p class="testimonial-author">Sarah & Michael</p>
+                                <p class="testimonial-role">Wedding Couple 2024</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <i class="fas fa-quote-left quote-icon"></i>
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" alt="Client">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="testimonial-text">"Absolutely amazing experience! Polly made us feel so comfortable during our engagement shoot. The photos turned out beyond our expectations. Highly professional and talented photographer!"</p>
+                                <p class="testimonial-author">Emily & James</p>
+                                <p class="testimonial-role">Engagement Session 2024</p>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="testimonial-card">
+                                <i class="fas fa-quote-left quote-icon"></i>
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100" alt="Client">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="testimonial-text">"Best decision we made for our wedding! The photos are absolutely breathtaking. Polly captured emotions and moments we didn't even know happened. True artistry at its finest!"</p>
+                                <p class="testimonial-author">Jessica & David</p>
+                                <p class="testimonial-role">Wedding Couple 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container" data-aos="fade-up">
+            <h2>Get Us Free Printed Photos</h2>
+            <p>Book your session today and receive complimentary prints</p>
+            <button class="btn btn-primary">CONTACT NOW</button>
+        </div>
+    </section>
+
+    <!-- Articles -->
+    <section id="blog" style="background: var(--light-bg);">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Articles</h2>
+            <div class="row">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="article-card">
+                        <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=400" alt="Article">
+                        <div class="article-content">
+                            <div class="article-meta">DECEMBER 15, 2024</div>
+                            <h3>Top 10 Wedding Photo Tips</h3>
+                            <p>Discover essential tips for getting the perfect wedding photos on your special day.</p>
+                            <a href="#" class="btn-outline">READ MORE</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="article-card">
+                        <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400" alt="Article">
+                        <div class="article-content">
+                            <div class="article-meta">DECEMBER 10, 2024</div>
+                            <h3>Best Outdoor Photo Locations</h3>
+                            <p>Explore the most beautiful outdoor venues for your engagement and wedding photos.</p>
+                            <a href="#" class="btn-outline">READ MORE</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="article-card">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400" alt="Article">
+                        <div class="article-content">
+                            <div class="article-meta">DECEMBER 5, 2024</div>
+                            <h3>Preparing for Your Big Day</h3>
+                            <p>A comprehensive guide to planning your wedding photography timeline and poses.</p>
+                            <a href="#" class="btn-outline">READ MORE</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Polly Anderson</h4>
+                    <p>Professional wedding and portrait photographer based in New York. Capturing love stories and precious moments since 2014.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#portfolio">Portfolio</a>
+                    <a href="#services">Services</a>
+                    <a href="#blog">Blog</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-envelope"></i> polly@photography.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt"></i> New York, NY 10001</p>
+                    <p><i class="fas fa-clock"></i> Mon-Sat: 9AM - 6PM</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to get latest updates and offers</p>
+                    <div class="footer-newsletter">
+                        <input type="email" placeholder="Your email address">
+                        <button>Subscribe Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Polly Anderson Photography. All rights reserved. | Designed with ❤️ for beautiful moments</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Initialize Swiper for Testimonials
+        const testimonialSwiper = new Swiper('.testimonialSwiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            effect: 'fade',
+            fadeEffect: {
+                crossFade: true
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

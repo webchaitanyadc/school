@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaiswal Photo Studio - Professional Photography</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #000000;
+            --secondary: #ffffff;
+            --accent: #FFC107;
+            --text: #333;
+            --light-text: #666;
+            --gray-bg: #f8f8f8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background: var(--secondary);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1.2rem 5%;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.8rem 5%;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+        }
+
+        .nav-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--secondary);
+            letter-spacing: 3px;
+            position: relative;
+            animation: fadeInLeft 0.8s ease;
+        }
+
+        .logo span {
+            color: var(--accent);
+            font-size: 2.2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            animation: fadeInRight 0.8s ease;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--secondary);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-weight: 600;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section with Parallax */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 193, 7, 0.1) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .hero-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 5%;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            color: white;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-label {
+            color: var(--accent);
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--accent);
+            animation: slideInLeft 0.8s ease 0.3s both;
+        }
+
+        .hero-title {
+            font-size: 6rem;
+            margin-bottom: 2rem;
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -3px;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+        }
+
+        .hero-title .line span {
+            display: inline-block;
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        .hero-title .line:nth-child(1) span { animation-delay: 0.3s; }
+        .hero-title .line:nth-child(2) span { animation-delay: 0.5s; }
+        .hero-title .line:nth-child(3) span { animation-delay: 0.7s; }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .hero-title span.accent {
+            color: var(--accent);
+            position: relative;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            line-height: 1.9;
+            max-width: 600px;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 2rem;
+            animation: fadeInUp 1s ease 0.7s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.3rem 3.5rem;
+            background: var(--accent);
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 800;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(255, 193, 7, 0.3);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(255, 193, 7, 0.5);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            box-shadow: none;
+        }
+
+        .cta-secondary:hover {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 15px 50px rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-image {
+            position: relative;
+            height: 650px;
+            animation: fadeInRight 1s ease 0.5s both;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.05) rotateY(5deg);
+        }
+
+        .floating-badge {
+            position: absolute;
+            bottom: -30px;
+            right: -30px;
+            background: var(--accent);
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(255, 193, 7, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating-badge strong {
+            font-size: 2.5rem;
+            font-weight: 900;
+            display: block;
+            line-height: 1;
+        }
+
+        .floating-badge span {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Animated Stats Bar */
+        .stats-bar {
+            background: var(--accent);
+            padding: 3rem 5%;
+            display: flex;
+            justify-content: center;
+            gap: 8rem;
+            animation: slideInUp 1s ease;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        /* Services with Advanced Animations */
+        .services-showcase {
+            background: var(--secondary);
+        }
+
+        .service-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 700px;
+            position: relative;
+        }
+
+        .service-block.reverse {
+            direction: rtl;
+        }
+
+        .service-block.reverse > * {
+            direction: ltr;
+        }
+
+        .service-content {
+            padding: 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .service-block:hover .service-content::before {
+            opacity: 1;
+        }
+
+        .service-content.dark {
+            background: var(--primary);
+            color: white;
+        }
+
+        .service-content.yellow {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .service-number {
+            font-size: 5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            opacity: 0.15;
+            position: absolute;
+            top: 2rem;
+            left: 6rem;
+            z-index: 0;
+        }
+
+        .service-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-description {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-features li {
+            padding: 1rem 0;
+            padding-left: 2rem;
+            position: relative;
+            font-size: 1.05rem;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .service-features li:hover {
+            transform: translateX(10px);
+        }
+
+        .service-features li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: 900;
+            font-size: 1.3rem;
+            color: var(--accent);
+        }
+
+        .service-content.yellow .service-features li:before {
+            color: var(--primary);
+        }
+
+        .service-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-block:hover .service-image img {
+            transform: scale(1.15);
+        }
+
+        .service-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.3) 0%, rgba(0,0,0,0.5) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .service-block:hover .service-overlay {
+            opacity: 1;
+        }
+
+        .learn-more {
+            color: inherit;
+            text-decoration: none;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid currentColor;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .learn-more:hover {
+            gap: 2rem;
+        }
+
+        /* Portfolio with Masonry Grid */
+        .portfolio-grid {
+            padding: 8rem 5%;
+            background: var(--gray-bg);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .section-label {
+            color: var(--accent);
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 2px solid var(--accent);
+        }
+
+        .section-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 1;
+            border-radius: 10px;
+            animation: fadeInScale 0.6s ease both;
+        }
+
+        .grid-item:nth-child(1) { animation-delay: 0.1s; }
+        .grid-item:nth-child(2) { animation-delay: 0.2s; }
+        .grid-item:nth-child(3) { animation-delay: 0.3s; }
+        .grid-item:nth-child(4) { animation-delay: 0.4s; }
+        .grid-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .grid-item.tall {
+            grid-row: span 2;
+        }
+
+        .grid-item.wide {
+            grid-column: span 2;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: grayscale(20%);
+        }
+
+        .grid-item:hover img {
+            transform: scale(1.2) rotate(2deg);
+            filter: grayscale(0%);
+        }
+
+        .grid-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.9) 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-end;
+            padding: 2.5rem;
+            color: white;
+        }
+
+        .grid-item:hover .grid-overlay {
+            opacity: 1;
+        }
+
+        .overlay-category {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .overlay-title {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .overlay-desc {
+            font-size: 0.95rem;
+            opacity: 0.8;
+        }
+
+        /* Photographers with Hover Effects */
+        .photographers {
+            padding: 8rem 5%;
+            background: var(--primary);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photographers::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 50%, rgba(255, 193, 7, 0.05) 0%, transparent 50%);
+        }
+
+        .photographers .section-header {
+            position: relative;
+            z-index: 1;
+        }
+
+        .photographers-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .photographer-card {
+            text-align: center;
+            transition: transform 0.4s ease;
+        }
+
+        .photographer-card:hover {
+            transform: translateY(-20px);
+        }
+
+        .photographer-image-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .photographer-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%) contrast(1.2);
+            transition: all 0.5s ease;
+        }
+
+        .photographer-card:hover .photographer-image {
+            filter: grayscale(0%) contrast(1);
+            transform: scale(1.15);
+        }
+
+        .photographer-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.8) 0%, rgba(0,0,0,0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photographer-card:hover .photographer-overlay {
+            opacity: 1;
+        }
+
+        .photographer-social {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .photographer-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .photographer-role {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* About with Split Screen */
+        .about-section {
+            padding: 0;
+            background: var(--secondary);
+        }
+
+        .about-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 700px;
+        }
+
+        .about-text {
+            padding: 8rem 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about-text h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+
+        .about-text p {
+            font-size: 1.15rem;
+            line-height: 2;
+            margin-bottom: 2rem;
+            color: var(--light-text);
+        }
+
+        .about-image {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 10s ease;
+        }
+
+        .about-section:hover .about-image img {
+            transform: scale(1.1);
+        }
+
+        .about-highlight {
+            position: absolute;
+            bottom: 3rem;
+            left: 3rem;
+            background: var(--accent);
+            padding: 3rem;
+            max-width: 350px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+            animation: slideInLeft 0.8s ease;
+        }
+
+        .about-highlight h3 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .about-highlight p {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Testimonials with Cards */
+        .testimonials {
+            padding: 8rem 5%;
+            background: var(--gray-bg);
+        }
+
+        .testimonials-container {
+            max-width: 1600px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 3.5rem;
+            position: relative;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-size: 8rem;
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            color: var(--accent);
+            opacity: 0.2;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .testimonial-stars {
+            color: var(--accent);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .testimonial-position {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Contact with Modern Form */
+        .contact-section {
+            padding: 0;
+            background: var(--accent);
+        }
+
+        .contact-wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 800px;
+        }
+
+        .contact-info {
+            padding: 8rem 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-info h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+
+        .contact-info p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            line-height: 1.9;
+        }
+
+        .contact-details {
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            margin-bottom: 2.5rem;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        .contact-item::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .contact-item strong {
+            display: block;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .contact-item p {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            background: var(--primary);
+            padding: 8rem 6rem;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1.3rem;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1.5rem;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: all 0.4s ease;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .submit-button:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(255, 193, 7, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-content {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            transition: all 0.3s;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            font-size: 2.5rem;
+            color: white;
+            cursor: pointer;
+            z-index: 2001;
+            background: var(--accent);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            transition: all 0.3s;
+            font-weight: 300;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg) scale(1.1);
+        }
+
+        .modal-title {
+            color: white;
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            margin-top: 5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-item {
+            height: 320px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+            border-radius: 10px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.2);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Scroll Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .grid-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .photographers-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .hero-content,
+            .service-block,
+            .about-content,
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .service-block.reverse {
+                direction: ltr;
+            }
+
+            .hero-title {
+                font-size: 4rem;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .photographers-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-bar {
+                gap: 4rem;
+            }
+
+            .service-content,
+            .about-text,
+            .contact-info,
+            .contact-form {
+                padding: 4rem 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-item.tall,
+            .grid-item.wide {
+                grid-row: span 1;
+                grid-column: span 1;
+            }
+
+            .photographers-grid,
+            .testimonials-container {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .service-content,
+            .about-text,
+            .contact-info,
+            .contact-form {
+                padding: 3rem 2rem;
+            }
+
+            .service-title,
+            .about-text h2,
+            .contact-info h2 {
+                font-size: 2.5rem;
+            }
+
+            .floating-badge {
+                width: 100px;
+                height: 100px;
+                bottom: -20px;
+                right: -20px;
+            }
+
+            .floating-badge strong {
+                font-size: 1.8rem;
+            }
+
+            .floating-badge span {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-content">
+            <div class="logo">JAISWAL<span>.</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-label">PHOTOGRAPHY STUDIO IN JALNA</div>
+                <h1 class="hero-title">
+                    <div class="line"><span>CAPTURING</span></div>
+                    <div class="line"><span>LIFE'S</span></div>
+                    <div class="line"><span class="accent">MOMENTS.</span></div>
+                </h1>
+                <p class="hero-description">Professional photography services specializing in baby shoots, weddings, events, and commercial branding. Creating timeless memories with artistic vision and technical excellence.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="cta-button">Book Your Session</a>
+                    <a href="#portfolio" class="cta-button cta-secondary">View Portfolio</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-wrapper">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='650'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23333;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23000;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23grad)' width='600' height='650'/%3E%3Ccircle cx='300' cy='325' r='120' fill='%23FFC107' opacity='0.3'/%3E%3Ctext x='50%25' y='42%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='32' fill='%23fff' font-weight='bold'%3ECAMERA%3C/text%3E%3Ctext x='50%25' y='52%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='20' fill='%23FFC107'%3EPHOTOGRAPHY%3C/text%3E%3C/svg%3E" alt="Photography">
+                    <div class="floating-badge">
+                        <strong>10+</strong>
+                        <span>Years</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="stat-item">
+            <span class="stat-number">10,000+</span>
+            <span class="stat-label">Happy Clients</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">50,000+</span>
+            <span class="stat-label">Photos Captured</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">15+</span>
+            <span class="stat-label">Awards Won</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Satisfaction</span>
+        </div>
+    </section>
+
+    <!-- Services Showcase -->
+    <section id="services" class="services-showcase">
+        <div class="service-block scroll-reveal">
+            <div class="service-content yellow">
+                <div class="service-number">01</div>
+                <h2 class="service-title">PHOTOSHOOT<br>SERVICES</h2>
+                <p class="service-description">From intimate baby shoots to grand wedding celebrations, we capture every precious moment with artistic precision. Our experienced team ensures comfortable sessions that bring out natural emotions and authentic expressions.</p>
+                <ul class="service-features">
+                    <li>Baby & Newborn Photography Sessions</li>
+                    <li>Event Coverage & Live Documentation</li>
+                    <li>Pre-Wedding & Engagement Shoots</li>
+                    <li>Portrait & Family Photography</li>
+                </ul>
+                <a href="#portfolio" class="learn-more">VIEW PORTFOLIO →</a>
+            </div>
+            <div class="service-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='700'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23e8eaf6;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23c5cae9;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g1)' width='800' height='700'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='36' fill='%231a237e' font-weight='bold'%3EPHOTOSHOOT%3C/text%3E%3C/svg%3E" alt="Photoshoot">
+                <div class="service-overlay"></div>
+            </div>
+        </div>
+
+        <div class="service-block reverse scroll-reveal">
+            <div class="service-content dark">
+                <div class="service-number">02</div>
+                <h2 class="service-title">PRODUCTION<br>SERVICES</h2>
+                <p class="service-description">Professional production services for commercial projects, brand campaigns, and corporate needs. We handle everything from concept to final delivery, ensuring high-quality results that exceed expectations.</p>
+                <ul class="service-features">
+                    <li>Commercial Product Photography</li>
+                    <li>Brand Campaign Production & Strategy</li>
+                    <li>Corporate Event Coverage</li>
+                    <li>Professional Business Headshots</li>
+                </ul>
+                <a href="#contact" class="learn-more">GET STARTED →</a>
+            </div>
+            <div class="service-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='700'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23424242;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23212121;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g2)' width='800' height='700'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='36' fill='%23FFC107' font-weight='bold'%3EPRODUCTION%3C/text%3E%3C/svg%3E" alt="Production">
+                <div class="service-overlay"></div>
+            </div>
+        </div>
+
+        <div class="service-block scroll-reveal">
+            <div class="service-content dark">
+                <div class="service-number">03</div>
+                <h2 class="service-title">POST<br>PRODUCTION</h2>
+                <p class="service-description">Expert post-production services including professional editing, color grading, retouching, and album design. We transform your photos into stunning works of art ready for print or digital use.</p>
+                <ul class="service-features">
+                    <li>Professional Photo Editing & Enhancement</li>
+                    <li>Advanced Color Correction & Grading</li>
+                    <li>Custom Wedding Album Design</li>
+                    <li>High-Resolution Print Services</li>
+                </ul>
+                <a href="#about" class="learn-more">LEARN MORE →</a>
+            </div>
+            <div class="service-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='700'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FFC107;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23FFB300;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23g3)' width='800' height='700'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='32' fill='%23000' font-weight='bold'%3EPOST PRODUCTION%3C/text%3E%3C/svg%3E" alt="Post Production">
+                <div class="service-overlay"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section id="portfolio" class="portfolio-grid">
+        <div class="section-header scroll-reveal">
+            <div class="section-label">OUR WORK</div>
+            <h2 class="section-title">Featured Portfolio</h2>
+            <p class="section-description">Explore our diverse collection of photography work across different categories</p>
+        </div>
+        
+        <div class="grid-container">
+            <div class="grid-item wide" onclick="openGallery('baby')">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Cdefs%3E%3ClinearGradient id='gb' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23fce4ec;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23f8bbd0;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23gb)' width='800' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='28' fill='%23880e4f' font-weight='bold'%3EBABY PHOTOGRAPHY%3C/text%3E%3C/svg%3E" alt="Baby Photography">
+                <div class="grid-overlay">
+                    <div class="overlay-category">Newborn & Baby</div>
+                    <div class="overlay-title">Baby Photography</div>
+                    <div class="overlay-desc">Precious moments of your little ones</div>
+                </div>
+            </div>
+            
+            <div class="grid-item tall" onclick="openGallery('prewedding')">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='800'%3E%3Cdefs%3E%3ClinearGradient id='gp' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23fff3e0;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23ffe0b2;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23gp)' width='400' height='800'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='24' fill='%23e65100' font-weight='bold'%3EPRE-WEDDING%3C/text%3E%3C/svg%3E" alt="Pre-Wedding">
+                <div class="grid-overlay">
+                    <div class="overlay-category">Couples</div>
+                    <div class="overlay-title">Pre-Wedding Shoots</div>
+                    <div class="overlay-desc">Romance before the big day</div>
+                </div>
+            </div>
+            
+            <div class="grid-item" onclick="openGallery('events')">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cdefs%3E%3ClinearGradient id='ge' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23e8eaf6;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23c5cae9;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23ge)' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='22' fill='%231a237e' font-weight='bold'%3EEVENTS%3C/text%3E%3C/svg%3E" alt="Events">
+                <div class="grid-overlay">
+                    <div class="overlay-category">Celebrations</div>
+                    <div class="overlay-title">Event Photography</div>
+                    <div class="overlay-desc">Memorable celebrations captured</div>
+                </div>
+            </div>
+            
+            <div class="grid-item" onclick="openGallery('commercial')">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cdefs%3E%3ClinearGradient id='gc' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23e0f2f1;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23b2dfdb;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23gc)' width='400' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='20' fill='%23004d40' font-weight='bold'%3ECOMMERCIAL%3C/text%3E%3C/svg%3E" alt="Commercial">
+                <div class="grid-overlay">
+                    <div class="overlay-category">Business</div>
+                    <div class="overlay-title">Commercial Branding</div>
+                    <div class="overlay-desc">Elevate your brand identity</div>
+                </div>
+            </div>
+            
+            <div class="grid-item wide" onclick="openGallery('wedding')">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='400'%3E%3Cdefs%3E%3ClinearGradient id='gw' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f3e5f5;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23e1bee7;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23gw)' width='800' height='400'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='28' fill='%234a148c' font-weight='bold'%3EWEDDING ALBUMS%3C/text%3E%3C/svg%3E" alt="Wedding">
+                <div class="grid-overlay">
+                    <div class="overlay-category">Weddings</div>
+                    <div class="overlay-title">Wedding Albums</div>
+                    <div class="overlay-desc">Your special day, immortalized</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photographers Team -->
+    <section class="photographers">
+        <div class="section-header scroll-reveal">
+            <div class="section-label">MEET THE TEAM</div>
+            <h2 class="section-title">Our Photographers</h2>
+            <p class="section-description">Talented professionals dedicated to capturing your perfect moments</p>
+        </div>
+        
+        <div class="photographers-grid">
+            <div class="photographer-card scroll-reveal">
+                <div class="photographer-image-wrapper">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cdefs%3E%3ClinearGradient id='gph1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23333;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23000;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23gph1)' width='400' height='400'/%3E%3Ccircle cx='200' cy='160' r='50' fill='%23FFC107' opacity='0.4'/%3E%3Crect x='160' y='220' width='80' height='100' fill='%23FFC107' opacity='0.4'/%3E%3Ctext x='50%25' y='85%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='18' fill='%23fff' font-weight='bold'%3EPhotographer 1%3C/text%3E%3C/svg%3E" alt="Photographer" class="photographer-image">
+                    <div class="photographer-overlay">
+                        <div class="photographer-social">
+                            <span>📷</span>
+                            <span>📘</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="photographer-name">Raj Jaiswal</div>
+                <div class="photographer-role">Lead Photographer</div>
+            </div>
+            
+            <div class="photographer-card scroll-reveal">
+                <div class="photographer-image-wrapper">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cdefs%3E%3ClinearGradient id='gph2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23333;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23000;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23gph2)' width='400' height='400'/%3E%3Ccircle cx='200' cy='160' r='50' fill='%23FFC107' opacity='0.4'/%3E%3Crect x='160' y='220' width='80' height='100' fill='%23FFC107' opacity='0.4'/%3E%3Ctext x='50%25' y='85%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='18' fill='%23fff' font-weight='bold'%3EPhotographer 2%3C/text%3E%3C/svg%3E" alt="Photographer" class="photographer-image">
+                    <div class="photographer-overlay">
+                        <div class="photographer-social">
+                            <span>📷</span>
+                            <span>📘</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="photographer-name">Priya Sharma</div>
+                <div class="photographer-role">Wedding Specialist</div>
+            </div>
+            
+            <div class="photographer-card scroll-reveal">
+                <div class="photographer-image-wrapper">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cdefs%3E%3ClinearGradient id='gph3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23333;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23000;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23gph3)' width='400' height='400'/%3E%3Ccircle cx='200' cy='160' r='50' fill='%23FFC107' opacity='0.4'/%3E%3Crect x='160' y='220' width='80' height='100' fill='%23FFC107' opacity='0.4'/%3E%3Ctext x='50%25' y='85%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='18' fill='%23fff' font-weight='bold'%3EPhotographer 3%3C/text%3E%3C/svg%3E" alt="Photographer" class="photographer-image">
+                    <div class="photographer-overlay">
+                        <div class="photographer-social">
+                            <span>📷</span>
+                            <span>📘</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="photographer-name">Amit Kumar</div>
+                <div class="photographer-role">Commercial Expert</div>
+            </div>
+            
+            <div class="photographer-card scroll-reveal">
+                <div class="photographer-image-wrapper">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cdefs%3E%3ClinearGradient id='gph4' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23333;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23000;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23gph4)' width='400' height='400'/%3E%3Ccircle cx='200' cy='160' r='50' fill='%23FFC107' opacity='0.4'/%3E%3Crect x='160' y='220' width='80' height='100' fill='%23FFC107' opacity='0.4'/%3E%3Ctext x='50%25' y='85%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='18' fill='%23fff' font-weight='bold'%3EPhotographer 4%3C/text%3E%3C/svg%3E" alt="Photographer" class="photographer-image">
+                    <div class="photographer-overlay">
+                        <div class="photographer-social">
+                            <span>📷</span>
+                            <span>📘</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="photographer-name">Sneha Patel</div>
+                <div class="photographer-role">Baby Photography</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section scroll-reveal">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>EXCELLENCE IN PHOTOGRAPHY SINCE 2010</h2>
+                <p>Jaiswal Photo Studio has been Jalna's premier photography destination for over a decade. We combine traditional values with modern techniques to create stunning visual stories.</p>
+                <p>Our passion for photography goes beyond capturing images—we capture emotions, preserve memories, and create art that stands the test of time. Every project is approached with dedication, creativity, and a commitment to excellence.</p>
+                <p>From intimate family moments to grand celebrations, we've had the privilege of documenting thousands of special occasions across Maharashtra, building lasting relationships with our clients.</p>
+                <a href="#contact" class="cta-button" style="margin-top: 1rem;">Get In Touch</a>
+            </div>
+            <div class="about-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='700'%3E%3Cdefs%3E%3ClinearGradient id='gab' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f5f5f5;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23e0e0e0;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23gab)' width='800' height='700'/%3E%3Crect x='150' y='150' width='500' height='400' fill='%23333' opacity='0.2'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='28' fill='%232c2c2c' font-weight='bold'%3ESTUDIO SPACE%3C/text%3E%3C/svg%3E" alt="Studio">
+                <div class="about-highlight">
+                    <h3>10,000+</h3>
+                    <p>Happy Clients</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="section-header scroll-reveal">
+            <div class="section-label">CLIENT REVIEWS</div>
+            <h2 class="section-title">What People Say</h2>
+            <p class="section-description">Testimonials from families and brands we've worked with</p>
+        </div>
+        
+        <div class="testimonials-container">
+            <div class="testimonial-card scroll-reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">Jaiswal Photo Studio captured our baby's first moments beautifully. The team was incredibly patient and professional. These photos are treasures we'll cherish forever!</p>
+                <div class="testimonial-author">Priya & Rahul Sharma</div>
+                <div class="testimonial-position">New Parents</div>
+            </div>
+            
+            <div class="testimonial-card scroll-reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">Our wedding album exceeded all expectations. Every emotion, every detail was captured perfectly. The team was invisible yet omnipresent. Highly recommended!</p>
+                <div class="testimonial-author">Anjali & Vikram Patel</div>
+                <div class="testimonial-position">Wedding Couple</div>
+            </div>
+            
+            <div class="testimonial-card scroll-reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">We hired Jaiswal Studio for our brand campaign and the results were phenomenal. The creative vision and technical expertise elevated our product photography to a new level.</p>
+                <div class="testimonial-author">Neha Gupta</div>
+                <div class="testimonial-position">Marketing Director</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-wrapper">
+            <div class="contact-info scroll-reveal">
+                <h2>LET'S CREATE SOMETHING BEAUTIFUL TOGETHER</h2>
+                <p>Ready to capture your special moments? Get in touch with us to discuss your photography needs. We're here to bring your vision to life.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <strong>Address</strong>
+                        <p>Jaiswal Photo Studio<br>Main Market, Jalna<br>Maharashtra, India</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Phone</strong>
+                        <p>+91 98765 43210</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Email</strong>
+                        <p>info@jaiswalstudio.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Working Hours</strong>
+                        <p>Mon - Sat: 10:00 AM - 8:00 PM<br>Sunday: By Appointment</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form scroll-reveal">
+                <form id="bookingForm">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Service Type *</label>
+                        <select id="service" name="service" required>
+                            <option value="">Select a service</option>
+                            <option value="baby">Baby Photography</option>
+                            <option value="events">Event Photography</option>
+                            <option value="commercial">Commercial Branding</option>
+                            <option value="prewedding">Pre-Wedding Shoot</option>
+                            <option value="wedding">Wedding Album</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Preferred Date</label>
+                        <input type="date" id="date" name="date">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your vision..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" title="Facebook">📘</a>
+                <a href="#" title="Instagram">📷</a>
+                <a href="#" title="YouTube">📺</a>
+                <a href="#" title="WhatsApp">💬</a>
+            </div>
+            <p>&copy; 2024 Jaiswal Photo Studio. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; opacity: 0.8;">Professional Photography Services | Jalna, Maharashtra</p>
+        </div>
+    </footer>
+
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="modal">
+        <span class="close-modal" onclick="closeGallery()">&times;</span>
+        <div class="modal-content">
+            <h2 class="modal-title" id="galleryTitle"></h2>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+    </div>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your inquiry! We will contact you within 24 hours to discuss your photography needs.');
+            this.reset();
+        });
+
+        // Gallery data
+        const galleries = {
+            baby: {
+                title: 'Baby Photography Portfolio',
+                images: 12,
+                color: '#fce4ec'
+            },
+            events: {
+                title: 'Event Photography Portfolio',
+                images: 15,
+                color: '#e8eaf6'
+            },
+            commercial: {
+                title: 'Commercial Branding Portfolio',
+                images: 10,
+                color: '#e0f2f1'
+            },
+            prewedding: {
+                title: 'Pre-Wedding Shoots Portfolio',
+                images: 18,
+                color: '#fff3e0'
+            },
+            wedding: {
+                title: 'Wedding Albums Portfolio',
+                images: 20,
+                color: '#f3e5f5'
+            }
+        };
+
+        function openGallery(category) {
+            const gallery = galleries[category];
+            const modal = document.getElementById('galleryModal');
+            const title = document.getElementById('galleryTitle');
+            const grid = document.getElementById('galleryGrid');
+            
+            title.textContent = gallery.title;
+            grid.innerHTML = '';
+            
+            for (let i = 1; i <= gallery.images; i++) {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Crect fill='${encodeURIComponent(gallery.color)}' width='320' height='320'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='18' fill='%23333' font-weight='bold'%3EImage ${i}%3C/text%3E%3C/svg%3E" alt="Gallery Image ${i}">`;
+                grid.appendChild(item);
+            }
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGallery() {
+            const modal = document.getElementById('galleryModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal on outside click
+        document.getElementById('galleryModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeGallery();
+            }
+        });
+
+        // Counter animation for stats
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString() + (element.dataset.suffix || '');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString() + (element.dataset.suffix || '');
+                }
+            }, 20);
+        }
+
+        // Trigger counter animation when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.stat-number').forEach(stat => {
+                        const target = parseInt(stat.textContent.replace(/,/g, ''));
+                        stat.dataset.suffix = stat.textContent.includes('+') ? '+' : stat.textContent.includes('%') ? '%' : '';
+                        animateCounter(stat, target);
+                    });
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsBar = document.querySelector('.stats-bar');
+        if (statsBar) {
+            statsObserver.observe(statsBar);
+        }
+    </script>
+</body>
+</html>
